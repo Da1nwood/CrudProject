@@ -15,22 +15,22 @@ import java.util.List;
 public class FamilyController {
     final FamilyService familyService;
 
-    @PostMapping("/create")
+    @PostMapping
     ResponseEntity<String> createFamily() {
         return familyService.createFamily();
     }
 
-    @PutMapping("/add")
+    @PutMapping
     ResponseEntity<Void> addAccountToFamily(@RequestBody FamilyDTO familyDTO) throws AccountNotFoundException, FamilyNotFoundExceptions {
         return familyService.addUsersToFamily(familyDTO);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     ResponseEntity<List<Account>> getFamilyAccountIds() throws AccountNotFoundException, FamilyNotFoundExceptions {
         return familyService.getAccountsByFamily();
     }
 
-    @DeleteMapping("/users")
+    @DeleteMapping
     ResponseEntity<List<Long>> removeAccountFromFamily() throws AccountNotFoundException, FamilyNotFoundExceptions {
         return familyService.removeAccountFromFamily();
     }
