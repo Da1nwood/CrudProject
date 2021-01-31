@@ -3,7 +3,7 @@ package com.example.TestProject.services;
 import com.example.TestProject.dto.UserDataDTO;
 import com.example.TestProject.entity.Account;
 import com.example.TestProject.entity.UserData;
-import com.example.TestProject.repozitoties.AccountRepozitory;
+import com.example.TestProject.repozitoties.AccountRepository;
 import com.example.TestProject.services.exceptions.AccountNotFoundException;
 import com.example.TestProject.services.security.AuthenticationFacade;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("/profile")
 public class UserDataService {
-    final AccountRepozitory accountRepozitory;
+    final AccountRepository accountRepozitory;
 
     final AuthenticationFacade authenticationFacade;
 
@@ -74,7 +74,7 @@ public class UserDataService {
                 .getUserdata();
     }
 
-    public UserDataService(AccountRepozitory accountRepozitory, AuthenticationFacade authenticationFacade) {
+    public UserDataService(AccountRepository accountRepozitory, AuthenticationFacade authenticationFacade) {
         this.accountRepozitory = accountRepozitory;
         this.authenticationFacade = authenticationFacade;
     }

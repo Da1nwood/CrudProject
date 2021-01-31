@@ -3,8 +3,8 @@ package com.example.TestProject.services;
 import com.example.TestProject.dto.FamilyDTO;
 import com.example.TestProject.entity.Account;
 import com.example.TestProject.entity.Family;
-import com.example.TestProject.repozitoties.AccountRepozitory;
-import com.example.TestProject.repozitoties.FamilyRepoz;
+import com.example.TestProject.repozitoties.AccountRepository;
+import com.example.TestProject.repozitoties.FamilyRepository;
 import com.example.TestProject.services.exceptions.AccountNotFoundException;
 import com.example.TestProject.services.exceptions.FamilyNotFoundExceptions;
 import com.example.TestProject.services.security.AuthenticationFacade;
@@ -21,11 +21,11 @@ import java.util.stream.Stream;
 
 @Service
 public class FamilyService {
-    final FamilyRepoz familyRepoz;
-    final AccountRepozitory accountRepozitory;
+    final FamilyRepository familyRepoz;
+    final AccountRepository accountRepozitory;
     final AuthenticationFacade authenticationFacade;
 
-    public FamilyService(FamilyRepoz familyRepoz, AccountRepozitory accountRepozitory, AuthenticationFacade authenticationFacade) {
+    public FamilyService(FamilyRepository familyRepoz, AccountRepository accountRepozitory, AuthenticationFacade authenticationFacade) {
         this.familyRepoz = familyRepoz;
         this.accountRepozitory = accountRepozitory;
         this.authenticationFacade = authenticationFacade;
@@ -52,13 +52,13 @@ public class FamilyService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @Transactional(readOnly = true)
-    public ResponseEntity<String> getFamilyIdForUser() throws FamilyNotFoundExceptions, AccountNotFoundException {
-        String username = authenticationFacade.getAuthentication().getName();
-        Account account = accountRepozitory.getAccountByAccountCredentials_Username(username).orElseThrow(AccountNotFoundException::new);
-        Long familyId = Optional.of(account.getFamily().getId()).orElseThrow(FamilyNotFoundExceptions::new);
-        return new ResponseEntity<>(String.valueOf(familyId), HttpStatus.OK);
-    }
+//    @Transactional(readOnly = true)
+//    public ResponseEntity<String> getFamilyIdForUser() throws FamilyNotFoundExceptions, AccountNotFoundException {
+//        String username = authenticationFacade.getAuthentication().getName();
+//        Account account = accountRepozitory.getAccountByAccountCredentials_Username(username).orElseThrow(AccountNotFoundException::new);
+//        Long familyId = Optional.of(account.getFamily().getId()).orElseThrow(FamilyNotFoundExceptions::new);
+//        return new ResponseEntity<>(String.valueOf(familyId), HttpStatus.OK);
+//    }
 
     @Transactional(readOnly = true)
     public ResponseEntity<List<Account>> getAccountsByFamily() throws FamilyNotFoundExceptions, AccountNotFoundException {
