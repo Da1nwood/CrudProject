@@ -6,8 +6,8 @@ import com.example.TestProject.entity.AccountCredentials;
 import com.example.TestProject.entity.Enums.Roles;
 import com.example.TestProject.entity.Enums.TypeOfSegment;
 import com.example.TestProject.entity.UserData;
-import com.example.TestProject.repozitoties.AccountCredentialsRepozitory;
-import com.example.TestProject.repozitoties.AccountRepozitory;
+import com.example.TestProject.repozitoties.AccountCredentialsRepository;
+import com.example.TestProject.repozitoties.AccountRepository;
 import com.example.TestProject.services.security.AuthenticationFacade;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
@@ -32,11 +32,11 @@ import java.util.Set;
 @Service
 public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
-    final AccountRepozitory accountRepozitory;
-    final AccountCredentialsRepozitory accountCredentialsRepozitory;
+    final AccountRepository accountRepozitory;
+    final AccountCredentialsRepository accountCredentialsRepozitory;
     private final AuthenticationFacade authenticationFacade;
 
-    public UserService(PasswordEncoder passwordEncoder, AccountRepozitory accountRepozitory, AccountCredentialsRepozitory accountCredentialsRepozitory, AuthenticationFacade authenticationFacade) {
+    public UserService(PasswordEncoder passwordEncoder, AccountRepository accountRepozitory, AccountCredentialsRepository accountCredentialsRepozitory, AuthenticationFacade authenticationFacade) {
         this.passwordEncoder = passwordEncoder;
         this.accountRepozitory = accountRepozitory;
         this.accountCredentialsRepozitory = accountCredentialsRepozitory;
